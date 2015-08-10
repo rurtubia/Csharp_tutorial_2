@@ -60,6 +60,8 @@ namespace UnderstandingInheritance
 
         //"virtual" grants permission to be overriden.
         //"abstract" forces to override
+        //"sealed" is the opposite of an abstract class, it means that overriding/inheritance is not permitted.
+
         //public virtual string FormatMe()
         public override string FormatMe()
         {
@@ -71,7 +73,7 @@ namespace UnderstandingInheritance
         }
     }
 
-    class Truck : Vehicle 
+    sealed class Truck : Vehicle 
     {
         public int TowingCapacity { get; set; }
 
@@ -85,4 +87,6 @@ namespace UnderstandingInheritance
                 this.TowingCapacity);
         }
     }
+
+
 }
