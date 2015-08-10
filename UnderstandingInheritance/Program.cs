@@ -16,7 +16,7 @@ namespace UnderstandingInheritance
             myCar.Color = "Black";
             myCar.Year = 2005;
 
-            printCarDetails(myCar);
+            printVehicleDetails(myCar);
 
             Truck myTruck = new Truck();
             myTruck.Make = "Ford";
@@ -25,25 +25,43 @@ namespace UnderstandingInheritance
             myTruck.Color = "Black";
             myTruck.TowingCapacity = 1200;
 
-            printCarDetails(myTruck);
+            printVehicleDetails(myTruck);
             Console.ReadLine();
         }
 
-        private static void printCarDetails(Car _car) 
+        private static void printVehicleDetails(Vehicle _vehicle) 
         {
-            Console.WriteLine("Here are the car's details: {0}",
-                _car.FormatMe());
+            Console.WriteLine("Here are the vehicle's details: {0}",
+                _vehicle.FormatMe());
         }
     }
 
-    class Car 
+    abstract class Vehicle 
     {
         public string Make { get; set; }
-        public string Model { get; set; }
+        public string  Model { get; set; }
         public int Year { get; set; }
-        public string Color { get; set; }
+        public string  Color { get; set; }
 
-        public string FormatMe()
+        //There is no defined body in an abstract method
+        public abstract string FormatMe();
+    }
+
+    
+
+
+    class Car : Vehicle
+    {
+        //public string Make { get; set; }
+        //public string Model { get; set; }
+        //public int Year { get; set; }
+        //public string Color { get; set; }
+
+
+        //"virtual" grants permission to be overriden.
+        //"abstract" forces to override
+        //public virtual string FormatMe()
+        public override string FormatMe()
         {
             return String.Format("{0} - {1} - {2} - {3}",
                 this.Make,
@@ -53,9 +71,18 @@ namespace UnderstandingInheritance
         }
     }
 
-    class Truck : Car 
+    class Truck : Vehicle 
     {
         public int TowingCapacity { get; set; }
 
+
+        //overriding a method from the superclass
+        public override string FormatMe()
+        {
+            return String.Format("{0} - {1} - {2} Towing units",
+                this.Make,
+                this.Model,
+                this.TowingCapacity);
+        }
     }
 }
